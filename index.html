@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F1E38">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ディズニー予定表">
+<title>ディズニー攻略プラン 7/24-25</title>
+<style>
+:root{
+  --paper:#F5F8FB;
+  --card:#FFFFFF;
+  --ink:#0F1E38;
+  --ink-2:#41546F;
+  --line:#D8E2ED;
+  --land:#B3122E;
+  --sea:#0B6E78;
+  --heat:#D8480B;
+  --cool:#2E7FC2;
+  --gold:#9A7318;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",YuGothic,Meiryo,system-ui,sans-serif;
+  font-size:16px;line-height:1.7;
+  -webkit-text-size-adjust:100%;
+  padding-bottom:64px;
+}
+.wrap{max-width:520px;margin:0 auto;padding:0 14px}
+
+/* ---- header ---- */
+header{
+  background:var(--ink);color:#fff;
+  padding:22px 0 18px;
+  padding-top:calc(22px + env(safe-area-inset-top));
+}
+.eyebrow{font-size:11px;letter-spacing:.22em;opacity:.65;margin:0 0 6px}
+h1{font-size:23px;line-height:1.35;margin:0 0 10px;font-weight:800;letter-spacing:.01em}
+.sub{font-size:13px;line-height:1.6;opacity:.82;margin:0}
+.sub b{color:#FFD9A0;font-weight:700}
+
+/* ---- tabs ---- */
+nav{
+  position:sticky;top:0;z-index:20;
+  background:rgba(245,248,251,.96);
+  backdrop-filter:saturate(1.4) blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:9px 14px;max-width:520px;margin:0 auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto;border:1px solid var(--line);background:var(--card);
+  color:var(--ink-2);font:inherit;font-size:13px;font-weight:700;
+  padding:9px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;
+  min-height:40px;
+}
+.tab[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tab[data-k="land"][aria-selected="true"]{background:var(--land);border-color:var(--land)}
+.tab[data-k="sea"][aria-selected="true"]{background:var(--sea);border-color:var(--sea)}
+
+section[hidden]{display:none}
+section{padding-top:18px}
+
+h2{font-size:17px;margin:26px 0 12px;letter-spacing:.01em;display:flex;align-items:center;gap:8px}
+h2::before{content:"";width:4px;height:17px;background:var(--ink);border-radius:2px}
+h2:first-child{margin-top:4px}
+
+/* ---- timeline ---- */
+.tl{position:relative;margin:0;padding:0 0 0 76px;list-style:none}
+.tl::before{content:"";position:absolute;left:60px;top:6px;bottom:6px;width:3px;border-radius:2px;
+  background:linear-gradient(180deg,var(--cool) 0%,var(--cool) 22%,#E9A23B 34%,var(--heat) 48%,var(--heat) 62%,#E9A23B 74%,var(--cool) 88%,var(--cool) 100%);}
+.tl li{position:relative;margin:0 0 12px}
+.tl .t{
+  position:absolute;left:-76px;top:11px;width:52px;text-align:right;
+  font-size:12px;font-weight:800;color:var(--ink-2);font-variant-numeric:tabular-nums;line-height:1.3;
+}
+.tl li::after{content:"";position:absolute;left:-19px;top:16px;width:11px;height:11px;border-radius:50%;
+  background:var(--card);border:3px solid var(--ink-2)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14.5px}
+.card p{margin:0 0 6px}
+.card p:last-child{margin-bottom:0}
+.card b{font-weight:800}
+
+/* states */
+li.key .card{border-color:var(--gold);border-width:2px;background:#FFFCF3}
+li.key::after{background:var(--gold);border-color:var(--gold);width:13px;height:13px;left:-20px}
+li.hot .card{border-color:#F3C9AE;background:#FFF6F1}
+li.hot::after{background:var(--heat);border-color:var(--heat)}
+li.hot .t{color:var(--heat)}
+li.key .t{color:var(--gold)}
+
+.badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;
+  padding:3px 8px;border-radius:5px;margin-bottom:7px}
+.b-key{background:var(--gold);color:#fff}
+.b-hot{background:var(--heat);color:#fff}
+
+/* ---- blocks ---- */
+.note{border-left:4px solid var(--heat);background:#FFF6F1;padding:11px 13px;border-radius:0 10px 10px 0;font-size:14px;margin:14px 0}
+.note.cool{border-color:var(--cool);background:#F0F6FC}
+.note b{font-weight:800}
+
+.rows{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.row{padding:11px 14px;border-bottom:1px solid var(--line);font-size:14px}
+.row:last-child{border-bottom:0}
+.row .h{font-weight:800;display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:2px}
+.row .price{font-size:12.5px;color:var(--sea);font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+.row .d{color:var(--ink-2);font-size:13.5px}
+
+ul.plain{margin:0;padding-left:1.15em;font-size:14.5px}
+ul.plain li{margin-bottom:8px}
+
+/* ---- checklist ---- */
+.chk{list-style:none;margin:0;padding:0}
+.chk li{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:9px;overflow:hidden}
+.chk label{display:flex;gap:11px;align-items:flex-start;padding:13px 14px;cursor:pointer;font-size:14.5px}
+.chk input{appearance:none;flex:0 0 auto;width:22px;height:22px;margin:2px 0 0;border:2px solid var(--ink-2);border-radius:6px;background:var(--card);cursor:pointer;position:relative}
+.chk input:checked{background:var(--sea);border-color:var(--sea)}
+.chk input:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(42deg)}
+.chk input:focus-visible{outline:3px solid var(--cool);outline-offset:2px}
+.chk li:has(input:checked) label{opacity:.45;text-decoration:line-through;text-decoration-thickness:1px}
+.chk .sm{display:block;font-size:13px;color:var(--ink-2);margin-top:4px;font-weight:400;text-decoration:none}
+.chk .tt{font-weight:700}
+
+.foot{font-size:12.5px;color:var(--ink-2);border-top:1px solid var(--line);margin-top:28px;padding:14px 0 4px}
+@media (prefers-reduced-motion:no-preference){section{animation:f .18s ease-out}@keyframes f{from{opacity:0;transform:translateY(4px)}to{opacity:1}}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">2 0 2 6 . 0 7 . 2 3 – 2 6</p>
+    <h1>ディズニー攻略プラン<br>ランド 7/24 ／ シー 7/25</h1>
+    <p class="sub">宿：スパ&amp;ホテル舞浜ユーラシア 3泊・素泊まり ／ 絞って休み休み ／ <b>12–15時は暑さピーク＝屋内か温泉</b></p>
+  </div>
+</header>
+
+<nav>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" data-k="prep" aria-selected="true">準備</button>
+    <button class="tab" role="tab" data-k="land" aria-selected="false">7/24 ランド</button>
+    <button class="tab" role="tab" data-k="sea" aria-selected="false">7/25 シー</button>
+    <button class="tab" role="tab" data-k="pass" aria-selected="false">パス</button>
+    <button class="tab" role="tab" data-k="heat" aria-selected="false">暑さ対策</button>
+    <button class="tab" role="tab" data-k="hotel" aria-selected="false">宿</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ===== 準備 ===== -->
+<section id="prep">
+  <h2>出発前に済ませる</h2>
+  <ul class="chk">
+    <li><label><input type="checkbox"><span><span class="tt">アプリDL＋MyDisneyログイン</span><span class="sm">東京ディズニーリゾート・アプリ</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="tt">家族4人でグループ作成＋チケットQRを全員分登録</span><span class="sm">これが無いとDPAもプライオリティパスも取れない。別で買ったチケットが登録できるかも確認</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="tt">MyJCBアプリで「アプリ認証」をON＋通知ON</span><span class="sm">承認依頼をタップするだけで2秒。開きっぱなしだと承認画面が出ないことがあるので、その時は閉じて再ログイン</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="tt">普段の買い物を1〜2回そのJCBで決済</span><span class="sm">認証を通しておくと当日スキップされやすくなる</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="tt">モバイルバッテリー＋充電ケーブル</span><span class="sm">アプリ＋写真＋ファンで電池が一日もたない</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="tt">冷感グッズ：ポンチョ／アイスリング／ハンディファン</span><span class="sm">アイスリングは毎晩ユーラシアで冷やして翌日再使用</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="tt">帽子・日焼け止め・着替え1セット×4人</span><span class="sm">汗と濡れ系アトラクで必ず濡れる</span></span></label></li>
+    <li><label><input type="checkbox"><span><span class="tt">経口補水液／塩分タブレット・凍らせたペットボトル</span><span class="sm">水筒・ペットボトルは持込OK（缶・弁当・アルコールはNG）</span></span></label></li>
+  </ul>
+
+  <div class="note cool"><b>7/24にDPAをJCBで買うこと自体が慣らしになる。</b>翌日のアナ雪と同じ加盟店・同じ端末・前日決済なので、25日は認証が出ずに通りやすい。</div>
+</section>
+
+<!-- ===== ランド ===== -->
+<section id="land" hidden>
+  <h2>7/24（金）ランド</h2>
+  <ol class="tl">
+    <li><span class="t">6:40</span><div class="card"><p>ユーラシア送迎バスで舞浜駅へ →<b> ニューデイズで朝食調達</b></p></div></li>
+    <li><span class="t">7:10<br>–8:00</span><div class="card"><p>ゲート前に並ぶ。アプリの<b>購入画面を開いて</b>スタンバイ</p></div></li>
+    <li class="key"><span class="t">9:00<br>開園</span><div class="card"><span class="badge b-key">開園30秒でアプリ操作</span>
+      <p>① <b>美女と野獣のDPAを即購入</b>（最速枠。目安11:00前後）</p>
+      <p>② 続けて<b>モンスターズ・インク“ライド＆ゴーシーク！”のプライオリティパス</b>（無料）を取得</p>
+      <p>③ アプリを閉じて<b>スプラッシュ・マウンテンへダッシュ</b></p></div></li>
+    <li><span class="t">9:05<br>–9:35</span><div class="card"><p><b>スプラッシュ・マウンテン</b>（standby）。朝イチは列が短い＆<b>濡れて涼しい</b>ので夏は最優先</p></div></li>
+    <li><span class="t">9:40</span><div class="card"><p><b>モンスターズ・インク</b>（PPの時間・屋内で涼しい）。降りたら<b>次のPP＝ビッグサンダー</b>を取得（目安11:00枠）</p></div></li>
+    <li><span class="t">10:00<br>–10:45</span><div class="card"><p><b>ホーンテッドマンション → カリブの海賊</b>（standby）。どちらも屋内で並びも短め</p></div></li>
+    <li class="key"><span class="t">11:00</span><div class="card"><span class="badge b-key">DPA</span><p><b>美女と野獣“魔法のものがたり”</b>（DPAの時間）</p></div></li>
+    <li><span class="t">11:30</span><div class="card"><p><b>ビッグサンダー・マウンテン</b>（PPの時間）</p></div></li>
+    <li><span class="t">11:45</span><div class="card"><p><b>早めランチ</b>。モバイルオーダーで屋内レストラン（プラザパビリオン等）を混む前に確保</p></div></li>
+    <li class="hot"><span class="t">12:30<br>–15:30</span><div class="card"><span class="badge b-hot">暑さピーク</span>
+      <p>屋内で粘る：<b>プーさんのハニーハント</b>（空いてれば並ぶ）／スティッチ・エンカウンター／イッツ・ア・スモールワールド／カントリーベア。DPA・PPの残りもここで消化</p>
+      <p>▶ または<b>送迎バスで宿へ→温泉＆昼寝→夕方に再入園</b>。同じパークは再入場OK・バス20分間隔。<b>この日はこっちが一番ラク</b></p></div></li>
+    <li><span class="t">15:30<br>–17:00</span><div class="card"><p>午後の涼しめアトラク＆買い物。エントリー/PPが残っていれば消化</p></div></li>
+    <li><span class="t">17:00</span><div class="card"><p><b>早めの夕食</b></p></div></li>
+    <li><span class="t">夜</span><div class="card"><p><b>エレクトリカルパレード</b>（涼しい時間に鑑賞）→ 舞浜駅から送迎バス → <b>温泉で締め</b></p></div></li>
+  </ol>
+  <div class="note">パレードの<b>炎天下の場所取りは絶対やらない</b>。夏の熱中症で一番やられるパターン。見るなら夜。</div>
+</section>
+
+<!-- ===== シー ===== -->
+<section id="sea" hidden>
+  <h2>7/25（土）シー　※土曜＝激混み</h2>
+  <ol class="tl">
+    <li><span class="t">6:40</span><div class="card"><p>送迎バスで舞浜駅へ（ニューデイズで朝食）→ <b>リゾートラインでシーへ</b></p></div></li>
+    <li><span class="t">〜8:00</span><div class="card"><p>ゲート前へ。列は駅を降りて<b>右のサウス側</b>がやや短い傾向</p></div></li>
+    <li class="key"><span class="t">9:00<br>開園</span><div class="card"><span class="badge b-key">開園30秒でアプリ操作</span>
+      <p>① <b>アナ雪のDPAを秒で購入</b>（土曜は9:15前に完売）</p>
+      <p>② 続けて<b>トイマニ or ソアリンのDPA</b>を狙う</p>
+      <p>③ <b>海底2万マイル or タートル・トークのプライオリティパス</b>（無料）も確保</p></div></li>
+    <li><span class="t">9:10</span><div class="card"><p><b>ファンタジースプリングスへ直行</b>。アナ雪DPAの時間まで <b>ラプンツェル（7/25再開）or ピーターパン</b> のstandby</p></div></li>
+    <li class="key"><span class="t">DPA<br>枠</span><div class="card"><span class="badge b-key">DPA</span><p><b>アナとエルサのフローズンジャーニー</b>（アナ雪DPAの時間）</p></div></li>
+    <li><span class="t">午前<br>後半</span><div class="card"><p><b>トイマニ／ソアリンのDPA枠</b>を消化。間に<b>海底2万マイル</b>（PP）</p></div></li>
+    <li class="hot"><span class="t">12:00<br>–14:30</span><div class="card"><span class="badge b-hot">暑さピーク</span>
+      <p>早めランチ →<b> マーメイドラグーンで粘る</b>。屋内エリア丸ごと涼しく子ども向けが集中＝避暑の聖地。<b>マジックランプシアター・シーライダー</b>も屋内◎</p></div></li>
+    <li><span class="t">14:45</span><div class="card"><p><b>アメリカンウォーターフロントへ移動</b>（マーメイドラグーンから徒歩10分ほど。余裕をもって）</p></div></li>
+    <li class="key"><span class="t">15:00</span><div class="card"><span class="badge b-key">予約済み</span><p><b>ケープコッド・クックオフでダッフィー</b>。ショーを見ながら涼んで休憩＝暑さピーク明けにちょうどいい</p></div></li>
+    <li><span class="t">16:00<br>–18:00</span><div class="card"><p><b>アクアトピア</b>（濡れて涼む）、タワー・オブ・テラー、センター・オブ・ジ・アース、インディ、レイジングスピリッツ</p></div></li>
+    <li><span class="t">夜</span><div class="card"><p>ショー（ビリーヴ等）or 夜景のシーを散歩 → 送迎バスで宿 → <b>温泉で締め</b></p></div></li>
+  </ol>
+  <div class="note"><b>アナ雪が取れなかった時：</b>キャンセル拾い・追加発行が出るので午前中こまめにアプリを更新。ダメなら素直にスタンバイ。1個逃しても1日は回る。<br>※ラプンツェルは7/1〜24休止 → <b>7/25から再開</b></div>
+</section>
+
+<!-- ===== パス ===== -->
+<section id="pass" hidden>
+  <h2>パスの仕組み（2026年版）</h2>
+  <div class="rows">
+    <div class="row"><div class="h">DPA（プレミアアクセス）<span class="price">1,500〜2,500円/人</span></div><div class="d">並ばず乗れる時間指定券。開園と同時にアプリで購入。1つ持てる→使うか60分後に次</div></div>
+    <div class="row"><div class="h">プライオリティパス<span class="price">無料</span></div><div class="d">昔のファストパス的なやつ。8/31終了予定＝7月はまだ使える</div></div>
+    <div class="row"><div class="h">エントリー受付<span class="price">無料・抽選</span></div><div class="d">ショー・キャラグリの抽選</div></div>
+    <div class="row"><div class="h">スタンバイパス<span class="price">無料</span></div><div class="d">ほぼ廃止。一部ショップ／レストランのみ</div></div>
+  </div>
+
+  <h2>DPA対象と料金</h2>
+  <div class="rows">
+    <div class="row"><div class="h">ランド</div><div class="d">美女と野獣 2,000／ベイマックス 1,500／スプラッシュ 1,500</div></div>
+    <div class="row"><div class="h">シー</div><div class="d">アナ雪 2,000／ラプンツェル 2,000／ピーターパン 2,000／ソアリン 2,000／トイマニ 2,000／タワテラ 1,500／センター 1,500</div></div>
+  </div>
+
+  <h2>プライオリティパス（無料）対象</h2>
+  <div class="rows">
+    <div class="row"><div class="h">ランド</div><div class="d">ビッグサンダー／プーさん／ホーンテッドマンション／モンスターズ・インク／スター・ツアーズ</div></div>
+    <div class="row"><div class="h">シー</div><div class="d">インディ／海底2万マイル／タートル・トーク／シーライダー／マジックランプシアター／レイジングスピリッツ／アクアトピア</div></div>
+  </div>
+
+  <div class="note"><b>今回の課金は2個だけ。</b>ランド＝美女と野獣、シー＝アナ雪。4人×2個で計約16,000円。あとは無料パス＋朝イチ並びで回す。</div>
+</section>
+
+<!-- ===== 暑さ対策 ===== -->
+<section id="heat" hidden>
+  <h2>熱中症対策</h2>
+  <ul class="plain">
+    <li><b>時間帯の設計が命。</b>12〜15時は屋内アトラク＋食事（or 温泉戻り）に寄せて、外系は午前と夕方以降に集める</li>
+    <li><b>屋内アトラクは休憩所として使う。</b>ベンチで休むより冷房の効いた屋内アトラクを挟むほうが体力が戻る</li>
+    <li><b>炎天下の場所取りをしない。</b>ショーは夜に絞る</li>
+    <li><b>水分＋塩分をセットで。</b>のどが渇く前に一口ずつ。経口補水液・塩分タブレット必携。凍らせたペットボトルは保冷剤兼用</li>
+    <li><b>冷やすなら首・脇の下・足の付け根。</b>効率よく体温が下がる</li>
+    <li><b>子どものサインを大人が先回りで拾う。</b>顔が赤い・妙に静か・汗が止まる・機嫌が悪い → 予定を1個削って涼みに行く。子どもは背が低い分、地面の照り返しで大人より暑い</li>
+    <li><b>温泉が武器。</b>毎晩リセットすると翌日のコンディションが全然違う</li>
+  </ul>
+  <div class="note">ネッククーラーもポンチョも万能ではない。<b>直射日光の下では首を冷やしても体に熱がこもる。</b>日陰・水分・休憩とセットで。</div>
+</section>
+
+<!-- ===== 宿 ===== -->
+<section id="hotel" hidden>
+  <h2>スパ&amp;ホテル舞浜ユーラシア</h2>
+  <ul class="plain">
+    <li><b>送迎バス：</b>舞浜駅南口ロータリー(C-3)⇔ユーラシアを<b>毎朝6:00から20分間隔</b>で無料運行。好きな時間に駅へ出られる</li>
+    <li><b>朝食：</b>素泊まりなので舞浜駅の<b>ニューデイズ(6:30開店)</b>で調達。始発6:00便だと開店前なので6:40以降の便が○</li>
+    <li><b>温泉：</b>2026/1/15にフルリニューアル再開済み。夏キャンペーン(7/21〜8/31)が旅行期間に該当</li>
+    <li><b>導線：</b>ランド＝舞浜駅から徒歩すぐ／シー＝リゾートライン(約260円) or 徒歩20分</li>
+    <li><b>3泊とも同じ宿</b>＝途中のチェックアウトも荷物移動もなし</li>
+  </ul>
+  <p class="foot">パスの対象・料金・休止情報・開園時刻・送迎バス時刻は変わることがあるので、来園前に公式アプリとユーラシア公式で最終確認を。</p>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var LS='dplan.v1';
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+
+  function selectTab(k,save){
+    var found=false;
+    tabs.forEach(function(x){
+      var on=x.dataset.k===k; if(on)found=true;
+      x.setAttribute('aria-selected', on?'true':'false');
+    });
+    if(!found){k=tabs[0].dataset.k;tabs[0].setAttribute('aria-selected','true');}
+    document.querySelectorAll('main section').forEach(function(s){ s.hidden=(s.id!==k); });
+    if(save){try{localStorage.setItem(LS+'.tab',k);}catch(e){}}
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      selectTab(t.dataset.k,true);
+      window.scrollTo({top:0,behavior:'instant'});
+    });
+  });
+  try{ selectTab(localStorage.getItem(LS+'.tab')||tabs[0].dataset.k,false); }catch(e){}
+
+  var boxes=[].slice.call(document.querySelectorAll('.chk input[type=checkbox]'));
+  boxes.forEach(function(b,i){
+    var key=LS+'.ck'+i;
+    try{ if(localStorage.getItem(key)==='1') b.checked=true; }catch(e){}
+    b.addEventListener('change',function(){
+      try{ b.checked ? localStorage.setItem(key,'1') : localStorage.removeItem(key); }catch(e){}
+    });
+  });
+})();
+</script>
+</body>
+</html>
