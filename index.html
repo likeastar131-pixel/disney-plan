@@ -112,6 +112,11 @@ li.skip .card{text-decoration:line-through;text-decoration-color:var(--ink-2)}
 li.done::after{background:#5B9A54;border-color:#5B9A54}
 li.key .t{color:var(--gold)}
 
+.switch{display:flex;gap:6px;margin:0 0 14px}
+.sw{flex:1;border:1.5px solid var(--line);background:var(--card);color:var(--ink-2);
+  font:inherit;font-size:13.5px;font-weight:800;padding:11px 8px;border-radius:10px;cursor:pointer;min-height:44px}
+.sw[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sw[data-mode="rain"][aria-selected="true"]{background:#2E7FC2;border-color:#2E7FC2}
 .tag{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:5px;margin-right:6px;color:#fff;letter-spacing:.04em}
 .t-wait{background:#41546F}
 .t-dpa{background:#9A7318}
@@ -227,6 +232,11 @@ ul.plain li{margin-bottom:8px}
     <span class="tag t-wait">並び</span><span class="tag t-dpa">DPA(有料)</span><span class="tag t-pp">無料パス</span><span class="tag t-entry">抽選</span><span class="tag t-show">ショー</span>
   </div>
   <div class="note"><b>休止中：</b>モンスターズ・インク（7/31まで）／プーさんのハニーハント（8/28まで）／イッツ・ア・スモールワールド（8/3まで）／空飛ぶダンボ。<b>この3つは今回乗れない</b>ので、屋内避暑はフィルハーマジック・ホーンテッド・カリブに寄せてある。</div>
+  <div class="switch">
+    <button class="sw" data-day="land" data-mode="sun" aria-selected="true">☀️ 通常プラン</button>
+    <button class="sw" data-day="land" data-mode="rain" aria-selected="false">☔️ 雨の日プラン</button>
+  </div>
+  <div class="plan" data-day="land" data-mode="sun">
   <ol class="tl">
     <li><span class="t">6:45</span><div class="card"><p><b>ホテルで朝食</b>（6階レヴァンティーナ 6:45開店）。<b>開店と同時に入って手早く</b></p></div></li>
     <li><span class="t">7:20</span><div class="card"><p>送迎バスで舞浜駅へ → <b>ランドへ徒歩</b></p></div></li>
@@ -258,6 +268,38 @@ ul.plain li{margin-bottom:8px}
     <li><span class="t">夜①</span><div class="card"><p><span class="tag t-show">ショー</span><b>エレクトリカルパレード・ドリームライツ</b>（涼しい時間に鑑賞）</p></div></li>
     <li><span class="t">夜②</span><div class="card"><p><span class="tag t-show">ショー</span><b>Reach for the Stars: Everlasting Dreams</b>（シンデレラ城／7/2〜9/14は約25分・ドローン演出付き）→ 送迎バスで宿 → <b>温泉で締め</b></p></div></li>
   </ol>
+  </div>
+
+  <div class="plan" data-day="land" data-mode="rain" hidden>
+  <div class="note cool"><b>雨の日の考え方：</b>屋外ショーとコースターは雷で止まる前提。<b>屋内アトラクと屋内シアターに寄せる</b>。逆に人は減るので<b>並びは短くなる</b>。朝〜昼の動きは通常プランとほぼ同じで、<b>変えるのは無料パスの取り先と午後以降</b>。</div>
+  <ol class="tl">
+    <li><span class="t">6:45</span><div class="card"><p><b>ホテルで朝食</b>（6:45開店と同時に）。<b>レインポンチョと替え靴下を全員分持つ</b>。<b>紙チケットはジップロックへ</b></p></div></li>
+    <li><span class="t">7:20</span><div class="card"><p>送迎バスで舞浜駅へ → ランドへ徒歩</p></div></li>
+    <li><span class="t">7:40<br>–8:00</span><div class="card"><p>ゲート前に並ぶ。<b>雨の日は待機列で傘を差せない場面がある</b>のでポンチョを着ておく</p></div></li>
+    <li class="key"><span class="t">9:00<br>開園</span><div class="card"><span class="badge b-key">雨の日はここが変わる</span>
+      <p>① <span class="tag t-dpa">DPA</span><b>美女と野獣</b>（屋内なので雨でも通常運行。通常プランと同じ）</p>
+      <p>② <span class="tag t-entry">抽選</span><b>マジカルミュージックワールド</b>——<b>雨の日は価値が跳ね上がる</b>（屋内シアター）。最優先でエントリー</p>
+      <p>③ <span class="tag t-pp">無料</span>取り先を<b>ビッグサンダー → ホーンテッドマンション</b>に変更。ビッグサンダーは屋外で雷停止のリスクが高い</p></div></li>
+    <li><span class="t">9:15</span><div class="card"><span class="area">① トゥモローランド</span><p><span class="tag t-wait">並び</span><b>ベイマックス</b>。小雨なら通常運行。<b>止まっていたら</b> <span class="tag t-wait">並び</span><b>バズ・ライトイヤー</b>（屋内・すぐ隣）に振り替え</p></div></li>
+    <li><span class="t">10:05</span><div class="card"><span class="area">② ファンタジーランド</span><p><span class="tag t-wait">並び</span><b>ピーターパン空の旅</b>（屋内）</p></div></li>
+    <li class="key"><span class="t">11:00</span><div class="card"><span class="badge b-key">DPAの時間</span><span class="area">② ファンタジーランド</span><p><span class="tag t-dpa">DPA</span><b>美女と野獣</b>（屋内）</p></div></li>
+    <li><span class="t">11:30</span><div class="card"><span class="area">② ファンタジーランド</span><p><span class="tag t-wait">並び</span><b>ミッキーのフィルハーマジック</b>（屋内シアター）</p></div></li>
+    <li class="key"><span class="t">12:20</span><div class="card"><span class="badge b-key">一旦退園</span><p><b>アンバサダーホテルへ</b>。<b>雨の日はリゾートクルーザー（無料バス）を使う</b>——徒歩15分はずぶ濡れになる。再入園するので<b>紙チケットは絶対に濡らさない</b></p></div></li>
+    <li class="key"><span class="t">13:20<br>–14:40</span><div class="card"><span class="badge b-key">予約済み</span><p><b>シェフ・ミッキー</b>（80分制）。<b>雨のピーク時間帯を室内で丸ごとやり過ごせる</b>。ここは雨の日ほど価値が高い</p></div></li>
+    <li><span class="t">15:00</span><div class="card"><p>クルーザーでランドへ戻って再入園</p></div></li>
+    <li><span class="t">15:30</span><div class="card"><span class="area">③ 西側</span>
+      <p><span class="tag t-show">ショー</span><b>ベイマックスのミッション・クールダウン</b>は<b>雨天中止の可能性が高い</b>。アプリで確認</p>
+      <p><b>中止なら</b>：<span class="tag t-wait">並び</span><b>スティッチ・エンカウンター</b>／<span class="tag t-wait">並び</span><b>魅惑のチキルーム</b>（どちらも屋内シアター）に振り替え</p></div></li>
+    <li><span class="t">16:00</span><div class="card"><span class="area">③ 西側</span><p><span class="tag t-wait">並び</span><b>スプラッシュ・マウンテン</b>——<b>どうせ濡れるので雨の日と好相性</b>。ただし雷が鳴ると止まる。動いていて空いていれば最優先</p></div></li>
+    <li><span class="t">16:40</span><div class="card"><span class="area">③ 西側</span><p><span class="tag t-pp">無料</span><b>ホーンテッドマンション</b>（朝に取ったパス／屋内）</p></div></li>
+    <li><span class="t">17:15</span><div class="card"><span class="area">④ アドベンチャーランド</span><p><span class="tag t-wait">並び</span><b>カリブの海賊</b>（屋内）。雨で空いていれば <span class="tag t-wait">並び</span><b>ジャングルクルーズ</b>も（屋根付きの船）</p></div></li>
+    <li><span class="t">18:00</span><div class="card"><p><b>夕食は早めに屋内で確保</b>。雨の日はレストランが混むので<b>モバイルオーダーを早めに</b>。※マジカルミュージックワールド当選ならその時間を最優先</p></div></li>
+    <li><span class="t">夜</span><div class="card">
+      <p><span class="tag t-show">ショー</span><b>エレクトリカルパレード／Reach for the Stars は雨天中止の可能性大</b>（特にドローン演出は風雨に弱い）</p>
+      <p><b>中止なら無理に粘らない。</b>屋内で買い物を済ませて<b>早めに宿へ戻って温泉</b>。翌日のシーに体力を回す方が得</p></div></li>
+  </ol>
+  </div>
+
   <div class="note"><b>☔️ この日は昼以降の降水確率80%。</b>夜のパレードとキャッスルショーは中止もありうる前提で。詳しくは「☔️ 雨」タブへ。<br><b>この日は昼に一度パークを出る</b>（シェフ・ミッキー）。再入園があるので<b>紙チケットは全員分しっかり保管</b>。昼の冷房休憩が確保できたぶん、宿へ温泉に戻る必要はなし。<br>パレードの<b>炎天下の場所取りは絶対やらない</b>。夜の2本（パレード→キャッスルショー）は続けて観られるので夕方以降にまとめる。</div>
 </section>
 
@@ -268,6 +310,11 @@ ul.plain li{margin-bottom:8px}
     <span class="tag t-wait">並び</span><span class="tag t-dpa">DPA(有料)</span><span class="tag t-pp">無料パス</span><span class="tag t-entry">抽選</span><span class="tag t-show">ショー</span>
   </div>
   <div class="note"><b>休止中：</b>インディ・ジョーンズ（再開未定）／マーメイドラグーンシアター（長期休止）／フォートレス。<b>マーメイドラグーンのエリア自体は営業中</b>なので避暑には使える。<br>✅ アナ雪は6/4に再開済み。<b>ラプンツェルは7/25が再開初日</b>——並びは伸びる前提で<b>朝イチに直行</b>する。</div>
+  <div class="switch">
+    <button class="sw" data-day="sea" data-mode="sun" aria-selected="true">☀️ 通常プラン</button>
+    <button class="sw" data-day="sea" data-mode="rain" aria-selected="false">☔️ 雨の日プラン</button>
+  </div>
+  <div class="plan" data-day="sea" data-mode="sun">
   <ol class="tl">
     <li class="key"><span class="t">6:45</span><div class="card"><span class="badge b-key">全員そろって行動</span>
       <p><b>4人で朝食</b>（6:45開店と同時に入って手早く）</p>
@@ -303,6 +350,37 @@ ul.plain li{margin-bottom:8px}
     <li><span class="t">18:30<br>–19:45</span><div class="card"><span class="area">⑥ ソアリン／トイマニ</span><p><span class="tag t-wait">並び</span><b>ソアリン</b> か <b>トイ・ストーリー・マニア！</b>の<b>どちらか一つ</b>。夕方以降は待ちが落ち着く傾向。<b>疲れていたら両方切ってOK</b></p></div></li>
     <li><span class="t">夜</span><div class="card"><p><span class="tag t-show">ショー</span><b>ビリーヴ！〜シー・オブ・ドリームス〜</b>（ハーバーの夜のショー）→ 送迎バスで宿 → <b>温泉で締め</b></p></div></li>
   </ol>
+  </div>
+
+  <div class="plan" data-day="sea" data-mode="rain" hidden>
+  <div class="note cool"><b>雨の日の考え方：</b>シーは<b>屋内アトラクが多いので雨に強い</b>。マーメイドラグーンはエリアごと屋内、ドリームスも屋内シアター。<b>止まりやすいのはアクアトピア・レイジング・センターと夜のビリーヴ</b>。無料パスの取り先をそこから外すのが最大の変更点。</div>
+  <ol class="tl">
+    <li class="key"><span class="t">6:45</span><div class="card"><span class="badge b-key">全員そろって行動</span><p><b>4人で朝食</b>。<b>レインポンチョ・替え靴下・ジップロックの紙チケット</b>を確認。<b>先に並んで後から合流はNG</b></p></div></li>
+    <li><span class="t">7:10</span><div class="card"><p><b>4人で出発</b>。<b>雨なら徒歩20分はきついので、送迎バスで舞浜駅→リゾートライン</b>に切り替える判断も</p></div></li>
+    <li><span class="t">7:30<br>頃</span><div class="card"><p>ゲート前に全員で並ぶ。ポンチョを着て待機。パパはアプリの購入画面をスタンバイ</p></div></li>
+    <li class="key"><span class="t">9:00<br>開園</span><div class="card"><span class="badge b-key">雨の日はここが変わる</span>
+      <p>① <span class="tag t-dpa">DPA</span><b>アナ雪を秒で購入</b>（屋内。通常プランと同じ／狙い11:30〜12:30）</p>
+      <p>② <span class="tag t-entry">抽選</span><b>ドリームス・テイク・フライト</b>——<b>完全屋内なので雨でも通常どおり実施</b>。雨の日はここが本命。<b>ビリーヴ</b>は中止の可能性が高いのでエントリーは任意</p>
+      <p>③ <span class="tag t-pp">無料</span>取り先を<b>レイジングスピリッツ → マジックランプシアター</b>に変更（レイジングは屋外で雷停止のリスク大）</p></div></li>
+    <li class="key"><span class="t">9:20<br>–10:30</span><div class="card"><span class="badge b-key">雨の日ほどチャンス</span><span class="area">① ファンタジースプリングス</span><p><span class="tag t-wait">並び</span><b>ラプンツェル</b>（再開初日）。<b>雨で客足が鈍るぶん、通常より待ちが短くなる可能性がある</b>。ここは粘る価値あり</p></div></li>
+    <li><span class="t">10:40</span><div class="card"><span class="area">① ファンタジースプリングス</span><p><span class="tag t-wait">並び</span><b>ティンカーベルのビジーバギー</b>。長ければ切ってOK</p></div></li>
+    <li class="key"><span class="t">11:30</span><div class="card"><span class="badge b-key">DPAの時間</span><span class="area">① ファンタジースプリングス</span><p><span class="tag t-dpa">DPA</span><b>アナとエルサのフローズンジャーニー</b>。ここで<b>2枚目＝タートル・トーク</b>を取得（屋内）</p></div></li>
+    <li><span class="t">12:20<br>–13:30</span><div class="card"><span class="area">② マーメイドラグーン</span><p>ランチ →<b> マーメイドラグーンで粘る</b>。<b>エリアごと屋内なので雨宿りに最適</b>。<span class="tag t-pp">無料</span><b>マジックランプシアター</b>を消化</p></div></li>
+    <li><span class="t">13:35</span><div class="card"><span class="area">③ ロストリバーデルタへ移動</span><p>徒歩10分。<b>移動中がいちばん濡れる</b>のでポンチョを着てから出る</p></div></li>
+    <li class="key"><span class="t">13:50<br>–14:15</span><div class="card"><span class="badge b-key">雨でも確実に観られる</span><span class="area">③ ハンガーステージ</span><p><span class="tag t-show">ショー</span><b>ドリームス・テイク・フライト</b>（25分・完全屋内）。<b>天候の影響を受けない</b>ので、雨の日の目玉になる</p></div></li>
+    <li><span class="t">14:30</span><div class="card"><p>アメリカンウォーターフロントへ移動（徒歩10〜12分）</p></div></li>
+    <li class="key"><span class="t">15:00</span><div class="card"><span class="badge b-key">予約済み</span><span class="area">④ アメリカンウォーターフロント</span><p><b>ケープコッド・クックオフ</b>。屋内なので雨でも問題なし。<b>濡れた体を乾かす時間として使う</b></p></div></li>
+    <li><span class="t">15:45</span><div class="card"><span class="area">④ アメリカンウォーターフロント</span><p><span class="tag t-pp">無料</span><b>タートル・トーク</b>（屋内）→ 続けて <span class="tag t-wait">並び</span><b>トイ・ストーリー・マニア！</b>（屋内・すぐ近く）。<b>通常プランでは夕方送りだが、雨の日はここで拾う</b></p></div></li>
+    <li><span class="t">17:00</span><div class="card"><span class="area">⑤〜各所</span>
+      <p><b>屋内の絶叫系を優先</b>：<span class="tag t-wait">並び</span><b>タワー・オブ・テラー</b>（屋内・102cm）／<span class="tag t-wait">並び</span><b>海底2万マイル</b>（屋内）</p>
+      <p><b>アクアトピア・レイジングスピリッツ・センター・オブ・ジ・アースは雷で止まりやすい</b>。動いていれば乗る、程度に考える</p></div></li>
+    <li><span class="t">18:30</span><div class="card"><span class="area">⑥ ソアリン</span><p><span class="tag t-wait">並び</span><b>ソアリン</b>（屋内）。雨で空いていれば狙い目</p></div></li>
+    <li><span class="t">夜</span><div class="card">
+      <p><span class="tag t-show">ショー</span><b>ビリーヴは雨天中止の可能性が高い</b>（ハーバーの水上ショー）</p>
+      <p><b>中止なら早めに切り上げて宿へ。</b>2日連続で歩き回った後なので、<b>温泉に浸かって翌日の東京観光に体力を残す</b>方が賢い</p></div></li>
+  </ol>
+  </div>
+
   <div class="note cool"><b>もっと前に並びたい場合：</b>朝食を捨てて<b>6:40に4人で出発＝7:00着</b>にすれば列は前になる。ただし子ども2人が朝食抜きで20分歩くことになるので、<b>おすすめは朝食を食べてから全員で出る方</b>。7:30着でも土曜のシーなら十分戦える。</div>
 
   <div class="note"><b>アナ雪のDPAが取れなかった時：</b>DPAは1つしか持てないので、<b>ラプンツェルかソアリンのDPAに切り替えて確保</b>。アナ雪は<b>並びで</b>（開園直後が一番短い）。午前中こまめにアプリを更新して<b>再販・キャンセル拾い</b>も狙う。</div>
@@ -509,13 +587,35 @@ ul.plain li{margin-bottom:8px}
     });
   });
 
+  // ---- 通常 / 雨 プラン切替 ----
+  var sws=[].slice.call(document.querySelectorAll('.sw'));
+  function selectPlan(day,mode,save){
+    sws.forEach(function(b){
+      if(b.dataset.day!==day)return;
+      b.setAttribute('aria-selected', b.dataset.mode===mode?'true':'false');
+    });
+    document.querySelectorAll('.plan[data-day="'+day+'"]').forEach(function(el){
+      el.hidden=(el.dataset.mode!==mode);
+    });
+    if(save){try{localStorage.setItem(LS+'.plan.'+day,mode);}catch(e){}}
+  }
+  sws.forEach(function(b){
+    b.addEventListener('click',function(){ selectPlan(b.dataset.day,b.dataset.mode,true); });
+  });
+  ['land','sea'].forEach(function(day){
+    var m='sun';
+    try{ m=localStorage.getItem(LS+'.plan.'+day)||'sun'; }catch(e){}
+    selectPlan(day,m,false);
+  });
+
   // ---- editable timelines (reorder / done / skip) ----
   function store(k,v){try{localStorage.setItem(LS+'.'+k,JSON.stringify(v));}catch(e){}}
   function load(k){try{var v=localStorage.getItem(LS+'.'+k);return v?JSON.parse(v):null;}catch(e){return null;}}
 
   [].slice.call(document.querySelectorAll('.tl')).forEach(function(tl){
     var sec=tl.closest('section'); if(!sec) return;
-    var id=sec.id;
+    var plan=tl.closest('.plan');
+    var id=sec.id+(plan?('-'+plan.dataset.mode):'');
     var items=[].slice.call(tl.children);
     items.forEach(function(li,i){
       li.dataset.sid=id+'-'+i;
